@@ -1,0 +1,6 @@
+.myNav .nav-link{
+    display: flex;
+    gap: 25px;
+    color: white;
+    margin:10px
+}

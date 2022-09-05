@@ -1,100 +1,133 @@
 import React from 'react';
 import axios from 'axios';
+import img from './images/book.jpeg';
+import ModalBook  from './modal';
+import Button from 'react-bootstrap/Button';
 import Carousel from 'react-bootstrap/Carousel';
-import './BestBooks.css'
-
-
 
 class BestBooks extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+
+      show:false,
       books: []
     }
   }
 
-  componentDidMount = () =>{
-    axios
-    .get(`http://localhost:3001/Books`)
-    .then(result =>{
-    
-     
-        this.setState({
-          books:result.data
-        })
-     
-     
-     
-    })
-    .catch(err =>{
-      console.log(err);
+
+
+  componentDidMount=async()=>{
+
+    await axios.get('http://localhost:3001/books')
+    .then(result=>{
+
+      this.setState({
+        books:result.data
+      })
+      
+      
     })
   }
+  
+ handeleclose=()=>{
+
+  this.setState({
+    show:false
+  })
+
+ } 
+
+
+ handlebutton=()=>{
+
+  this.setState({show:true})
+  
+ } 
+
+ updateBooks=(data)=>{
+
+  this.setState({
+    books:data
+
+  })
+
+ }
+
+ 
+
+ deleteHandle=(id)=>{
+  
+  
+  axios
+  .delete(`http://localhost:3001/deletebook/${id}`) 
+  .then(result =>{
+    this.setState({
+      books:result.data
+    })
+    
+
+ })}
+
+ 
+
 
 
   render() {
 
+    /* TODO: render all the books in a Carousel */
 
     return (
-      <div id = "MainDiv">
+      <>
+        <ModalBook newData={this.updateBooks} show={this.state.show}  closeShow={this.handeleclose} />
+
         
 
-        {this.state.books.length ? (
-<div id="myDiv" style={{width:"600px" }}>
-<Carousel >
-      <Carousel.Item>
-        <img 
-          className="d-block w-100"
-         
-          src="https://images-na.ssl-images-amazon.com/images/I/416WFGrlxBL._SX328_BO1,204,203,200_.jpg"
-          
-          alt="First slide"
-        />
-        <Carousel.Caption>
-          <h3> {this.state.books[0].title}</h3>
-        
-          <p >{this.state.books[0].description}</p>
-          
-          <h3 >{this.state.books[0].states}</h3>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item>
-        <img
-          className="d-block w-100"
-          src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1641403203i/57945316.jpg"
-          alt="Second slide"
-        />
+       
 
-        <Carousel.Caption>
-        <h3>{this.state.books[1].title}</h3>
-          <p>{this.state.books[1].description}</p>
-          <h3>{this.state.books[1].states}</h3>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item>
-        <img
-          className="d-block w-100"
-          src="https://m.media-amazon.com/images/I/41Jt+uR7gAL.jpg"
-          alt="Third slide"
-        />
+        <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
 
-        <Carousel.Caption>
-        <h3>{this.state.books[2].title}</h3>
-          <p>{this.state.books[2].description}</p>
-          <h3>{this.state.books[2].states}</h3>
-        </Carousel.Caption>
-      </Carousel.Item>
-   
-    </Carousel>
-</div>
-
-
+        <Button variant="secondary"  onClick={this.handlebutton}>ADD YOUR FAV BOOK! </Button>
 
           
-        ) : (
-          <h3>The Books Collection Is Empty :(</h3>
+                  
+                    {this.state.books.length ?  
+                    
+                    
+                    <Carousel>
+                      {this.state.books.map(item => (
+                      <Carousel.Item>
+
+                      
+                        <img
+                          className="d-block w-100"
+                          src={img}
+                          alt={item.title}
+                          style={{height: 400 , width:100}}
+                        />
+                        
+                        <Carousel.Caption>
+                        
+                          <h3>{item.title}</h3>
+                          <p>{item.description}</p>
+                        
+                          <Button variant="danger"  onClick={()=>this.deleteHandle(item._id)}>Delete Book </Button>
+                          
+                        </Carousel.Caption>
+                      </Carousel.Item>
+
+                      
+                     ) )}
+
+
+            </Carousel>
+                 
+        : (
+          <h3>No Books Found :(</h3>
         )}
-      </div>
+
+
+      </>
     )
   }
 }
