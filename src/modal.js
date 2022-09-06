@@ -2,14 +2,8 @@ import Modal from 'react-bootstrap/Modal';
 import React from "react";
 import axios from 'axios';
 
-// import Form from "react-bootstrap/Form";
-
 
 class ModalBook extends React.Component{
-
-  
-
-
 
   
 handleData=(event)=>{
@@ -24,20 +18,14 @@ handleData=(event)=>{
 
     console.log(obj)
     axios
-    .post('http://localhost:3001/addbook',obj)
+    .post('https://mohannad12.herokuapp.com/addbook',obj)
     .then(result=>{
 
         
         this.props.newData(result.data)
 
     })
-
-    
-    
-    
 }
-
-
 
     render(){
 
@@ -51,35 +39,25 @@ handleData=(event)=>{
           <Modal.Title> Book Details  </Modal.Title>
         </Modal.Header>
         <Modal.Body> 
-            <form onSubmit={this.handleData}>
-            <input type="text" name="title" placeholder='book name' />
-            <br></br>
-            <br></br>
-            <input type="text" name="bookdisc" placeholder='book dic' />
-            <br></br>
-            <br></br>
-            <input type="text" name="status" placeholder='bookstatus'/>
-            <br></br>
-            <br></br>
-            <button type='submit'>Add</button>
+        <form onSubmit={this.handleData}>
+          <input type="text" name="title" placeholder='book name' />
+          <br></br>
+          <br></br>
+          <input type="text" name="bookdisc" placeholder='book dic' />
+          <br></br>
+          <br></br>
+          <input type="text" name="status" placeholder='bookstatus' />
+          <br></br>
+          <br></br>
+          <button type='submit'>Add</button>
 
-            </form>
-                
-            
-              </Modal.Body>
+        </form>
+        </Modal.Body>
         
-      </Modal>
-    </>
-        )
-    }
-
-
-
-
-
-
-
-
-}
-
-export default ModalBook ;
+        </Modal>
+      </>
+          )
+      }
+  }
+  
+  export default ModalBook ;

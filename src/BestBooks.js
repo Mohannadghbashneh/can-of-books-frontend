@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import img from './images/book.jpeg';
+import img from './images/bokke.jpg';
 import ModalBook  from './modal';
 import Button from 'react-bootstrap/Button';
 import Carousel from 'react-bootstrap/Carousel';
@@ -19,7 +19,7 @@ class BestBooks extends React.Component {
 
   componentDidMount=async()=>{
 
-    await axios.get('http://localhost:3001/books')
+    await axios.get('https://mohannad12.herokuapp.com/books')
     .then(result=>{
 
       this.setState({
@@ -60,7 +60,7 @@ class BestBooks extends React.Component {
   
   
   axios
-  .delete(`http://localhost:3001/deletebook/${id}`) 
+  .delete(`https://mohannad12.herokuapp.com/deletebook/${id}`) 
   .then(result =>{
     this.setState({
       books:result.data
@@ -132,4 +132,4 @@ class BestBooks extends React.Component {
   }
 }
 
-export default BestBooks;
+export default BestBooks; 
