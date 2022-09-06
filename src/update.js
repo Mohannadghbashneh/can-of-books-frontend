@@ -17,7 +17,7 @@ class UpdateBook extends React.Component{
        }
 
     axios
-    .put(`https://bookshop767676767676.herokuapp.com/updatebook/${obj.id}`,obj)
+    .put(`https://mohannad12.herokuapp.com/updatebook/${obj.id}`,obj)
     .then(result=>{
 
         

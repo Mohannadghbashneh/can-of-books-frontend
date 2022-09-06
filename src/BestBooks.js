@@ -21,7 +21,7 @@ class BestBooks extends React.Component {
 
   componentDidMount=async()=>{
 
-    await axios.get('https://bookshop767676767676.herokuapp.com/books')
+    await axios.get('https://mohannad12.herokuapp.com/books')
     .then(result=>{
 
       this.setState({
@@ -35,7 +35,7 @@ class BestBooks extends React.Component {
   
   
     axios
-    .delete(`https://bookshop767676767676.herokuapp.com/deletebook/${id}`) 
+    .delete(`https://mohannad12.herokuapp.com/deletebook/${id}`) 
     .then(result =>{
       this.setState({
         books:result.data
