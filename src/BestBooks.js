@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import img from './images/bokke.jpg';
+import img from './images/book.jpeg';
 import ModalBook  from './modal';
 import Button from 'react-bootstrap/Button';
 import Carousel from 'react-bootstrap/Carousel';
