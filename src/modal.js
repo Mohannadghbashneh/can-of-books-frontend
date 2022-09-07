@@ -5,17 +5,20 @@ import React from "react";
 import axios from 'axios';
 
 
+
 class ModalBook extends React.Component{
 
   
 handleData=(event)=>{
 
     event.preventDefault();
+
     const obj={
 
         title:event.target.title.value,
         description:event.target.bookdisc.value,
-        status:event.target.status.value
+        status:event.target.status.value,
+      
     }
 
 
